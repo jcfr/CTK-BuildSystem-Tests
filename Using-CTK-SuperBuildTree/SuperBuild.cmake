@@ -63,7 +63,7 @@ ENDIF()
 #
 set(proj ctk)
 ExternalProject_Add(${proj}
-  GIT_REPOSITORY "git@github.com:pieper/CTK.git"
+  GIT_REPOSITORY "git://github.com/pieper/CTK.git"
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS
     -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
