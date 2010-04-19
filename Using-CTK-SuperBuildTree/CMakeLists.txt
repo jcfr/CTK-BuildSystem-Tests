@@ -12,13 +12,21 @@ PROJECT(CTKBSTESTS)
 # Output directories.
 #
 IF(NOT LIBRARY_OUTPUT_PATH)
-  SET(LIBRARY_OUTPUT_PATH ${CTK_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all libraries.")
+  SET(LIBRARY_OUTPUT_PATH ${CTKBSTESTS_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all libraries.")
 ENDIF(NOT LIBRARY_OUTPUT_PATH)
 IF(NOT EXECUTABLE_OUTPUT_PATH)
-  SET(EXECUTABLE_OUTPUT_PATH ${CTK_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all executables.")
+  SET(EXECUTABLE_OUTPUT_PATH ${CTKBSTESTS_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all executables.")
 ENDIF(NOT EXECUTABLE_OUTPUT_PATH)
 SET(CTKBSTESTS_LIBRARY_PATH ${LIBRARY_OUTPUT_PATH}/${CMAKE_CFG_INTDIR})
 SET(CTKBSTESTS_EXECUTABLE_PATH ${EXECUTABLE_OUTPUT_PATH}/${CMAKE_CFG_INTDIR})
+
+#-----------------------------------------------------------------------------
+# Install directories, used for install rules.
+#
+SET(CTKBSTESTS_INSTALL_BIN_DIR "bin")
+SET(CTKBSTESTS_INSTALL_LIB_DIR "lib")
+SET(CTKBSTESTS_INSTALL_INCLUDE_DIR "include")
+SET(CTKBSTESTS_INSTALL_DOC_DIR "doc")
 
 #-----------------------------------------------------------------------------
 # Update CMake module path
@@ -29,6 +37,12 @@ SET(CMAKE_MODULE_PATH
   "${CMAKE_CURRENT_SOURCE_DIR}/CMake"
   "${CMAKE_CURRENT_BINARY_DIR}/CMake"
   ${CMAKE_MODULE_PATH})
+
+#-----------------------------------------------------------------------------
+# Clear CTKBSTESTS_BASE_INCLUDE_DIRS and CTKBSTESTS_BASE_LIBRARIES
+#
+SET(CTKBSTESTS_BASE_LIBRARIES CACHE INTERNAL "CTKBSTESTS libraries" FORCE)
+SET(CTKBSTESTS_BASE_INCLUDE_DIRS CACHE INTERNAL "CTKBSTESTS includes" FORCE)
 
 #-----------------------------------------------------------------------------
 # CMake Macro(s)
