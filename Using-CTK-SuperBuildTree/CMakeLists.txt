@@ -102,12 +102,12 @@ MARK_AS_ADVANCED(DART_TESTING_TIMEOUT)
 #-----------------------------------------------------------------------------
 # Convenient macro allowing to download a file
 #
-MACRO(downloadFile url file)
-  FILE(DOWNLOAD ${url} ${CTKBSTESTS_BINARY_DIR}/${file} STATUS status)
+MACRO(downloadFile url dest)
+  FILE(DOWNLOAD ${url} ${dest} STATUS status)
   LIST(GET status 0 error_code)
   LIST(GET status 1 error_msg)
   IF(error_code)
-    MESSAGE(FATAL_ERROR "error: Failed to download ${file} - ${error_msg}")
+    MESSAGE(FATAL_ERROR "error: Failed to download ${url} - ${error_msg}")
   ENDIF()
 ENDMACRO()
 
@@ -115,8 +115,12 @@ ENDMACRO()
 # Prerequisites
 #
 set(git_repo http://github.com/pieper/CTK/raw/master/)
+
 set(file CMake/ExternalProject.cmake)
-downloadFile(${git_repo}/${file} ${file})
+downloadFile(${git_repo}/${file} ${CTKBSTESTS_BINARY_DIR}/${file})
+
+set(file Utilities/CMake/FindCTK.cmake)
+downloadFile(${git_repo}/${file} ${CTKBSTESTS_BINARY_DIR}/CMake/FindCTK.cmake)
 
 #-----------------------------------------------------------------------------
 # QT
