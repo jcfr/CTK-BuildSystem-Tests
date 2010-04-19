@@ -145,6 +145,11 @@ ELSE()
   MESSAGE(FATAL_ERROR "error: Qt4 was not found on your system. You probably need to set the QT_QMAKE_EXECUTABLE variable")
 ENDIF()
 
+# Update CTKBSTESTS_BASE_LIBRARIES with QT libraries
+IF(QT4_FOUND)
+  SET(CTKBSTESTS_BASE_LIBRARIES ${CTKBSTESTS_BASE_LIBRARIES} ${QT_LIBRARIES} CACHE INTERNAL "CTKBSTESTS libraries" FORCE)
+ENDIF()
+
 #-----------------------------------------------------------------------------
 # Superbuild is used by default
 #
@@ -154,6 +159,18 @@ MARK_AS_ADVANCED(CTKBSTESTS_SUPERBUILD)
 IF(CTKBSTESTS_SUPERBUILD)
   INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/SuperBuild.cmake")
   RETURN()
+ENDIF()
+
+#-----------------------------------------------------------------------------
+# CTK
+#
+FIND_PACKAGE(CTK REQUIRED)
+
+IF(CTK_FOUND)
+  INCLUDE(${CTK_USE_FILE})
+  
+  # Update CTKBSTESTS_BASE_LIBRARIES with CTK libraries
+  SET(CTKBSTESTS_BASE_LIBRARIES ${CTKBSTESTS_BASE_LIBRARIES} ${CTK_LIBRARIES} CACHE INTERNAL "CTKBSTESTS libraries" FORCE)
 ENDIF()
 
 #-----------------------------------------------------------------------------
