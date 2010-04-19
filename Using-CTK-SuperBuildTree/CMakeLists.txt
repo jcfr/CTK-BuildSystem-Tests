@@ -31,6 +31,12 @@ SET(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH})
 
 #-----------------------------------------------------------------------------
+# CMake Macro(s)
+#
+INCLUDE(CMake/ctkbstestsMacroParseArguments.cmake)
+INCLUDE(CMake/ctkbstestsMacroBuildQtLib.cmake)
+
+#-----------------------------------------------------------------------------
 # Testing
 #
 OPTION(BUILD_TESTING "Test the project" ON)
